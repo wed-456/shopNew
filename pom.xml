@@ -12,7 +12,9 @@
     </parent>
     <!-- 聚合组合 多模块+继承-->
     <!-- 这就是下面所有的项目的父 -->
-
+    <modules>
+        <module>yll-integral</module>
+    </modules>
 
     <groupId>com.wwj</groupId>
     <artifactId>shop</artifactId>
