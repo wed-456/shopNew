@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.wwj</groupId>
-    <artifactId>yll-integral</artifactId>
+    <artifactId>shop-kill</artifactId>
     <version>1.0.0</version>
-    <name>yll-integral</name>
+    <name>shop-kill</name>
     <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
@@ -22,11 +22,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.0</version>
-        </dependency>
+
 
 
     </dependencies>

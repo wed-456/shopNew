@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mysql-master:
+    image: mysql:5.7.22
+    restart: always
+    hostname: mysql-master
+    container_name: mysql_master
+    ports:
+    - 3316:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Shanghai
+    volumes:
+    - ./master/mysql/data:/var/lib/mysql
+    - ./master/mysql/log:/var/log/mysql
+    command:
+      --log-bin=mysql-master-bin
+      --sync_binlog=1
+      --binlog-ignore-db=mysql
+      --binlog_format=mixed
+      --expire_logs_days=7
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wwj.yllintegral.mapper.IntegralMapper">
+  <!-- 返回主键 -->
+  <insert id="insertReturnId" useGeneratedKeys="true" keyProperty="integralId">
+    INSERT INTO
+    integral(user_id, integral_content, integral_status, integral_number)
+    VALUES (#{Integral.userId},#{Integral.integralContent},#{Integral.integralStatus},
+    #{Integral.integralNumber})
+  </insert>
+
+  <update id="updateSum" >
+    UPDATE integral
+    SET
+    <if test="status == 0 ">
+      integral.integral_sum =  #{number}
+    </if>
+    <if test="status == 1">
+      integral.integral_sum =  #{number}
+    </if>
+    where integral.integral_id=#{integralId}
+  </update>
+
+  <!-- 排序查询 -->
+  <resultMap id="find" type="com.wwj.yllintegral.domain.emtity.Integral">
+    <id property="integralId" column="integral_id"></id>
+    <result property="integralSum" column="integral_sum"></result>
+    <result property="integralContent" column="integral_content"></result>
+  </resultMap>
+
+  <select id="selectByIntegralId" resultMap="find">
+    SELECT *
+    FROM integral
+    WHERE integral.user_id=#{userId}
+    order BY integral.create_time DESC
+  </select>
+
+  <!-- 判断操作值查询 -->
+  <resultMap id="findStatus" type="com.wwj.yllintegral.domain.emtity.Integral">
+    <id property="integralId" column="integral_id"></id>
+    <result property="integralContent" column="integral_content"></result>
+    <result property="createTime" column="create_time"></result>
+    <result property="integralNumber" column="integral_number"></result>
+  </resultMap>
+  <select id="selectByIntegralStatus" resultMap="findStatus">
+    SELECT *
+    FROM integral
+    WHERE
+    <if test="status ==0">
+       integral.integral_status = #{status} AND
+    </if>
+    <if test="status ==1">
+      integral.integral_status = #{status} AND
+    </if>
+    integral.user_id =#{userId}
+  </select>
+
+</mapper>
